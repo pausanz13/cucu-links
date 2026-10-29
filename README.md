@@ -8,7 +8,7 @@ Web de Cucu en Vercel.
 |---|---|---|
 | `/` | — | Redirige a `/links` (se cambia en `vercel.json`) |
 | `/links` | `links.html` | Página de enlaces para las bios |
-| `/media-kit` | `media-kit.html` | Próximamente |
+| `/media-kit` | `media-kit.html` | Media kit para marcas y agencias (no indexado; se comparte por enlace) |
 
 ## Funciones
 
