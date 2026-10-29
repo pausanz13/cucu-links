@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Cucu — wrestling en español. Vídeos, directos, comunidad y proyectos.">
 <meta property="og:title" content="Cucu">
+<meta property="og:url" content="/links">
 <meta property="og:description" content="Wrestling en español. Vídeos, directos, comunidad y proyectos.">
 <meta property="og:image" content="/assets/avatar.jpg">
 <meta name="theme-color" content="#08080a">
@@ -160,6 +161,42 @@
   .co small svg{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
   a.co:hover small{color:var(--y1)}
 
+  /* TRABAJA CONMIGO */
+  .work{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding-block:8px}
+  .work p{margin:0;font-size:13px;color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;cursor:pointer;
+    background:var(--grad-y);color:var(--on-y);font:400 24px/1 var(--f-display);text-transform:uppercase;letter-spacing:.02em;
+    padding:18px 20px;border-radius:999px;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px rgba(252,172,3,.6)}
+  .btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4}
+
+  dialog.form{width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;margin:auto;padding:0;
+    border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink)}
+  dialog.form::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
+  .form-in{display:flex;flex-direction:column;gap:16px;padding:24px 20px 20px}
+  .form-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .form-top h2{margin:0;font:400 32px/1 var(--f-display);text-transform:uppercase}
+  .form-top p{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.45}
+  .x{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);cursor:pointer;display:grid;place-items:center}
+  .x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font:600 12px/1 var(--f-body);letter-spacing:.06em;color:var(--ink-2)}
+  .field label span{color:var(--muted);font-weight:400;letter-spacing:0}
+  .field input,.field textarea{width:100%;font:400 15px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .field textarea{min-height:110px;resize:vertical}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--y2);box-shadow:0 0 0 3px rgba(252,172,3,.18)}
+  .count{align-self:flex-end;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .form .btn{font-size:22px;padding:16px}
+  .form .btn[disabled]{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+  .msg{margin:0;font-size:13px;line-height:1.45;color:#ff8a8a}
+  .done{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:36px 20px 28px}
+  .done .ok{width:64px;height:64px;border-radius:50%;background:var(--grad-y);display:grid;place-items:center}
+  .done .ok svg{width:30px;height:30px;fill:none;stroke:var(--on-y);stroke-width:3}
+  .done h2{margin:0;font:400 30px/1 var(--f-display);text-transform:uppercase}
+  .done p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.5;max-width:30ch}
+  .done .ghost{margin-top:6px;background:none;border:1px solid var(--line);color:var(--ink-2);font:500 13px var(--f-body);padding:10px 16px;border-radius:999px;cursor:pointer}
+
   footer{text-align:center;font-size:12px;color:var(--muted)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -279,6 +316,34 @@
     </div>
   </section>
 
+  <section class="work">
+    <button class="btn" type="button" id="openForm">Trabaja conmigo <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p>¿Eres marca o agencia? Cuéntame tu proyecto.</p>
+  </section>
+
+  <dialog class="form" id="workDialog" aria-labelledby="formTitle">
+    <form class="form-in" id="workForm" novalidate>
+      <div class="form-top">
+        <div><h2 id="formTitle"><span class="w">Trabaja</span> <span class="y">conmigo</span></h2>
+        <p>Déjame tus datos y te respondo con mi media kit.</p></div>
+        <button class="x" type="button" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="name" autocomplete="name" required maxlength="80"></div>
+      <div class="field"><label for="f-agency">Agencia o marca</label><input id="f-agency" name="agency" autocomplete="organization" required maxlength="80"></div>
+      <div class="field"><label for="f-email">Email <span>(para poder responderte)</span></label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="120"></div>
+      <div class="field"><label for="f-project">Proyecto</label><textarea id="f-project" name="project" required maxlength="600" placeholder="Cuéntame en pocas líneas qué tienes en mente"></textarea><span class="count" id="count">0 / 600</span></div>
+      <div class="hp" aria-hidden="true"><label for="f-web">Web</label><input id="f-web" name="web" tabindex="-1" autocomplete="off"></div>
+      <p class="msg" id="formMsg" hidden></p>
+      <button class="btn" type="submit" id="sendBtn">Enviar</button>
+    </form>
+    <div class="done" id="formDone" hidden>
+      <span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <h2><span class="w">¡Mensaje</span> <span class="y">enviado!</span></h2>
+      <p>Gracias. Te escribiré pronto al email que me has dejado.</p>
+      <button class="ghost" type="button" data-close>Cerrar</button>
+    </div>
+  </dialog>
+
   <footer>© 2026 Cucu</footer>
 </main>
 
@@ -310,6 +375,53 @@
       </a>`).join('');
     }
   }).catch(() => {});
+</script>
+<script>
+  (() => {
+    const DEMO = false;
+    const dlg = document.getElementById('workDialog');
+    const form = document.getElementById('workForm');
+    const done = document.getElementById('formDone');
+    const msg = document.getElementById('formMsg');
+    const btn = document.getElementById('sendBtn');
+    const area = document.getElementById('f-project');
+    const count = document.getElementById('count');
+
+    const open = () => {
+      form.hidden = false; done.hidden = true; msg.hidden = true;
+      dlg.showModal(); document.getElementById('f-name').focus();
+    };
+    document.getElementById('openForm').addEventListener('click', open);
+    dlg.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    area.addEventListener('input', () => { count.textContent = `${area.value.length} / 600`; });
+
+    const fail = (t) => { msg.textContent = t; msg.hidden = false; };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.hidden = true;
+      const data = Object.fromEntries(new FormData(form));
+      if (!data.name.trim() || !data.agency.trim() || !data.project.trim()) return fail('Rellena nombre, agencia y proyecto.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return fail('Revisa el email: parece que no es válido.');
+
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      try {
+        if (!DEMO) {
+          const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+          if (!r.ok) throw new Error();
+        } else {
+          await new Promise(r => setTimeout(r, 700));
+        }
+        form.reset(); count.textContent = '0 / 600';
+        form.hidden = true; done.hidden = false;
+      } catch {
+        fail('No se ha podido enviar. Inténtalo de nuevo en unos minutos.');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Enviar';
+      }
+    });
+  })();
 </script>
 </body>
 </html>

@@ -1,28 +1,32 @@
-# Cucu · Links
+# Cucu
 
-Landing de enlaces de Cucu, lista para Vercel.
+Web de Cucu en Vercel.
 
-## Estructura
+## Páginas
 
-- `index.html` — la página (HTML + CSS + JS en un solo archivo)
-- `api/youtube.js` — función serverless que detecta si hay directo en YouTube y saca tus 3 últimos vídeos (sin API key; los Shorts se excluyen)
-- `assets/` — avatar, logos de proyectos y de colaboraciones
-- `vercel.json` — URLs limpias
+| URL | Archivo | Qué es |
+|---|---|---|
+| `/` | — | Redirige a `/links` (se cambia en `vercel.json`) |
+| `/links` | `links.html` | Página de enlaces para las bios |
+| `/media-kit` | `media-kit.html` | Próximamente |
 
-## Publicar en Vercel
+## Funciones
 
-1. Crea un repo en GitHub y sube esta carpeta.
-2. En vercel.com → **Add New → Project** → importa el repo.
-3. Framework preset: **Other**. Sin build command. Deploy.
-4. Te queda en `cucu.vercel.app` (o el nombre que esté libre; se cambia en Settings → Domains).
+- `api/youtube.js` → directo de YouTube y tus 3 últimos vídeos (sin clave).
+- `api/contact.js` → formulario "Trabaja conmigo": te envía cada mensaje por email con Resend.
 
-Alternativa sin GitHub: `npm i -g vercel` y luego `vercel` dentro de la carpeta.
+## Activar el formulario (una sola vez)
 
-## Opcional
+1. Crea una cuenta gratis en **resend.com** con `pausanz13@gmail.com`.
+2. En Resend → **API Keys** → **Create API Key**. Copia la clave (empieza por `re_`).
+3. En Vercel → tu proyecto → **Settings → Environment Variables**, añade:
+   - `RESEND_API_KEY` = la clave que has copiado
+   - `CONTACT_EMAIL` = `pausanz13@gmail.com`
+4. **Deployments** → en el último, menú `⋯` → **Redeploy** (las variables solo se aplican al volver a desplegar).
+5. Prueba el formulario en `/links`. El correo llega desde `onboarding@resend.dev`; pulsando "Responder" contestas directamente a la agencia.
 
-- **ID de canal**: ya va puesto (`UCqBn0a51GwLYv8KrdPe7E6A`). Si algún día cambia, añade en Vercel → Settings → Environment Variables `YT_CHANNEL_ID`.
-- **Estadísticas**: activa Vercel Analytics en el proyecto y añade `?utm_source=instagram` (o tiktok, youtube…) al enlace de cada bio para saber de dónde llegan las visitas.
+Nota: con la dirección de pruebas de Resend solo puedes recibir en el email con el que creaste la cuenta. Si un día tienes dominio propio, verifícalo en Resend y cambia el `from` en `api/contact.js`.
 
-## Cómo funciona el directo
+## Publicar
 
-`/api/youtube` mira `youtube.com/@wwecucu/live`. Si hay directo, aparece el banner rojo y la etiqueta "EN DIRECTO" en el avatar. El resultado se cachea 2 minutos en el CDN de Vercel.
+Sube el contenido de esta carpeta a GitHub e impórtalo en Vercel (preset **Other**). Cada cambio en GitHub se publica solo.
